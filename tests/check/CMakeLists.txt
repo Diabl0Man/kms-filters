@@ -25,5 +25,3 @@ set(TEST_VARIABLES
 )
 list(APPEND SUPPRESSIONS
   "${CMAKE_CURRENT_SOURCE_DIR}/valgrind.supp")
-
-add_subdirectory(element)

@@ -30,20 +30,6 @@
 boost::property_tree::ptree config;
 
 void
-testFaceOverlay (kurento::ModuleManager &moduleManager,
-                 std::shared_ptr <kurento::MediaObjectImpl> mediaPipeline)
-{
-  kurento::JsonSerializer w (true);
-
-  w.SerializeNVP (mediaPipeline);
-
-  std::shared_ptr <kurento::MediaObjectImpl >  object =
-    moduleManager.getFactory ("FaceOverlayFilter")->createObject (config, "",
-        w.JsonValue);
-  kurento::MediaSet::getMediaSet()->release (object);
-}
-
-void
 testGStreamerFilter (kurento::ModuleManager &moduleManager,
                      std::shared_ptr <kurento::MediaObjectImpl> mediaPipeline)
 {
@@ -61,19 +47,6 @@ testGStreamerFilter (kurento::ModuleManager &moduleManager,
     moduleManager.getFactory ("GStreamerFilter")->createObject (config, "",
         w.JsonValue);
 
-  kurento::MediaSet::getMediaSet()->release (object);
-}
-
-void
-testZBarFilter (kurento::ModuleManager &moduleManager,
-                std::shared_ptr <kurento::MediaObjectImpl> mediaPipeline)
-{
-  kurento::JsonSerializer w (true);
-
-  w.SerializeNVP (mediaPipeline);
-
-  std::shared_ptr <kurento::MediaObjectImpl >  object =
-    moduleManager.getFactory ("ZBarFilter")->createObject (config, "", w.JsonValue);
   kurento::MediaSet::getMediaSet()->release (object);
 }
 
@@ -95,9 +68,7 @@ main (int argc, char **argv)
 
   moduleManager.loadModule ("../../src/server/libkmsfiltersmodule.so");
 
-  testFaceOverlay (moduleManager, mediaPipeline);
   testGStreamerFilter (moduleManager, mediaPipeline);
-  testZBarFilter (moduleManager, mediaPipeline);
 
   kurento::MediaSet::getMediaSet()->release (mediaPipeline);
 
